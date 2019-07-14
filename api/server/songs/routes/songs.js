@@ -52,5 +52,32 @@ router.get('/:id', (req, res, next) => {
   res.status(200).json({ 'songID':req.params.id })
 })
 
+// POST - New Song
+router.post('/', (req, res, next) => {
+  let songID      = generateID()
+  let songName    = req.body.songName
+  let artistName  = req.body.artistName
+  let albumArtURI = req.body.albumArtURI || '#'
+  let length      = new Timer(req.body.minutesLong, req.body.secondsLong).length
+
+  let newSong = new LocalSongModel(
+    songID,
+    songName,
+    artistName,
+    albumArtURI,
+    length
+  )
+
+  new Song(newSong).save().then((createdSong) => {
+    if (createdSong === null) {
+      res.status(500).json({ 'error':'Unexpected Error encountered while creating new song.' })
+    } else {
+      res.status(200).json(createdSong)
+    }
+  })
+})
+
+// PATCH - Update Song Details
+
 
 module.exports = router
