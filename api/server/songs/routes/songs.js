@@ -49,7 +49,9 @@ router.get('/by-song/:songName', (req, res, next) => {
 
 // GET - One Song by ID
 router.get('/:id', (req, res, next) => {
-  res.status(200).json({ 'songID':req.params.id })
+  Song.findOne( { songID:req.params.id }).then((song) => {
+    res.status(200).json(song)
+  })
 })
 
 // POST - New Song
@@ -78,6 +80,36 @@ router.post('/', (req, res, next) => {
 })
 
 // PATCH - Update Song Details
+router.patch('/:id', (req, res, next) => {
+  [
+    {
+      prop: 'songName',
+      val: req.query.songName
+    },
+    {
+      prop: 'artistName',
+      val: req.query.artistName
+    },
+    {
+      prop: 'albumArtURI',
+      val: req.query.albumArtURI,
+    }
+  ]
+  .forEach((updatedProp) => {
+    if (updatedProp.val != null) {
+      let propToUpdate = {}
+      propToUpdate[updatedProp.prop] = updatedProp.val
+      console.log(propToUpdate)
+      Song.findOneAndUpdate({ songID:req.params.id }, propToUpdate, (err, updatedSong) => {
+        if (err) {
+          res.status(500).json({ error:err })
+        } else {
+          res.status(202).json(updatedSong)
+        }
+      })
+    }
+  })
+})
 
 
 module.exports = router
