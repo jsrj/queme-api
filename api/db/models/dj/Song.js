@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const SongTimer = require('../../../util/SongTimer')
 
 /* THE BASIC DATA NEEDED FOR ACCURATELY TRACKING AND IDENTIFYING INDIVIDUAL SONGS IN A COLLECTION */
-module.exports = mongoose.model('users', new mongoose
+module.exports = mongoose.model('songs', new mongoose
 .Schema({
 	songID:      { type: String }, // The Song's GUID
 	songName:    { type: String },
