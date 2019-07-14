@@ -32,5 +32,25 @@ router.get('/', (req, res, next) => {
   })
 })
 
+// GET - All Songs by Artist Name
+router.get('/by-artist/:artistName', (req, res, next) => {
+  res.status(200).json({ 'artistName':req.params.artistName })
+})
+
+// GET - All Songs with a length that is shorter than a specified mm/ss time
+router.get('/shorter-than/:minutes/:seconds', (req, res, next) => {
+  res.status(200).json({ 'minutes':req.params.minutes, 'seconds':req.params.seconds })
+})
+
+// GET - One Song by Song Name
+router.get('/by-song/:songName', (req, res, next) => {
+  res.status(200).json({ 'songName':req.params.songName })
+})
+
+// GET - One Song by ID
+router.get('/:id', (req, res, next) => {
+  res.status(200).json({ 'songID':req.params.id })
+})
+
 
 module.exports = router
