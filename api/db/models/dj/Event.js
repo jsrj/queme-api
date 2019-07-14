@@ -10,7 +10,8 @@ module.exports = mongoose.model('events', new mongoose
   creator:       { type: String },                                     // The DJ who created this Event
   locationName:  { type: String },                                     // The name of Venue hosting the Event
   eventDuration: { type: String, default: new SongTimer(30, 00, 00) }, // The Event's total duration in minutes
+  eventRef:      { type: String },                                     // GUID Ref. to Event (For ratings)
 
-  // GUID ref. to optional Playlists. If this is empty, controller should return DJ's collection instead
+  // GUID ref. list to optional Playlists. If this is empty, controller should return DJ's collection instead
   songList:      { type: [String] }
 }))
