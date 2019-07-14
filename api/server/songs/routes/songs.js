@@ -34,7 +34,13 @@ router.get('/', (req, res, next) => {
 
 // GET - All Songs by Artist Name
 router.get('/by-artist/:artistName', (req, res, next) => {
-  res.status(200).json({ 'artistName':req.params.artistName })
+  Song.find( { artistName:req.params.artistName }, (err, songs) => {
+    if (err) {
+      res.status(500).json(err).end()
+    } else {
+      res.status(200).json(songs)
+    }
+  })
 })
 
 // GET - All Songs with a length that is shorter than a specified mm/ss time
