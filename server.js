@@ -18,7 +18,7 @@ app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*')
 
     // Request methods you wish to allow
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST')
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH')
 
     // Request headers you wish to allow
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type')
@@ -27,15 +27,16 @@ app.use(function (req, res, next) {
     next();
 });
 
-// Import routes
-const login = require('./api/routes/login')
-const register = require('./api/routes/register')
+// Import top-level route controllers
+const baseController = require('./api/server/baseController')
 
-// Use routes
-app.use('/login', login)
-app.use('/register', register)
+// Assign controllers
+app.use('/api', baseController)
+
 
 // Listen for the server at a port.
-app.listen(process.env.PORT || 8000, (err) => {
-    console.log('Server running on ' + 8000)
+app.set('port', process.env.PORT || 8000)
+
+app.listen(app.get('port'), (err) => {
+    console.log(`Server running on port: ${app.get('port')}`)
 })
