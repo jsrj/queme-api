@@ -5,7 +5,7 @@ const Event    = require('./Event')
 const Playlist = require('./Playlist')
 
 /* THE DJ OBJECT WHICH TRACKS A DJ'S COLLECTION, PLAYLISTS (IF ANY), AND CURRENT/PAST EVENTS */
-module.exports = mongoose.model('users', new mongoose
+module.exports = mongoose.model('djs', new mongoose
 .Schema({
   djID:      { type: String     }, // The DJ's GUID
   userID:    { type: String     }, // The DJ's actual User GUID
