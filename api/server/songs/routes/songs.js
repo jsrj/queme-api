@@ -50,7 +50,13 @@ router.get('/shorter-than/:minutes/:seconds', (req, res, next) => {
 
 // GET - One Song by Song Name
 router.get('/by-song/:songName', (req, res, next) => {
-  res.status(200).json({ 'songName':req.params.songName })
+  Song.findOne( { songName: req.params.songName }, (err, song) => {
+    if (err) {
+      res.status(500).json(err).end()
+    } else {
+      res.status(200).json(song)
+    }
+  })
 })
 
 // GET - One Song by ID
