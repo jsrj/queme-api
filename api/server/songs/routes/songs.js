@@ -72,7 +72,7 @@ router.post('/', (req, res, next) => {
     if (createdSong === null) {
       res.status(500).json({ 'error':'Unexpected Error encountered while creating new song.' })
     } else {
-      res.status(200).json(createdSong)
+      res.status(201).json(createdSong)
     }
   })
 })
