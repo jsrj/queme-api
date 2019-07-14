@@ -20,14 +20,14 @@ function generateID() {
   return uuid().split('-').join('').toUpperCase()
 }
 
-// GET - All Songs
+// GET - All Songs that exist in the app
 router.get('/', (req, res, next) => {
   Song.find()
   .then((songs) => {
     if (songs === null) {
       res.status(200).json({ 'message':'Could not find any songs...' })
     } else {
-      res.status(200).json(songs)
+      res.status(200).json({ 'songs':songs })
     }
   })
 })
