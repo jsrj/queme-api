@@ -1,4 +1,4 @@
-const SongTimer = (minutes, seconds, milliseconds) => {
+function SongTimer (minutes, seconds, milliseconds) {
 
   // Priv.
   this._minutes      = minutes
@@ -9,4 +9,4 @@ const SongTimer = (minutes, seconds, milliseconds) => {
   this.length = `${this._minutes}:${this._seconds}`
 }
 
-export default SongTimer
+module.exports = SongTimer
